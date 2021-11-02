@@ -11,7 +11,8 @@ Major goals:
 ## todo (immediate):
 
 - [x] deploy and test the default starter kit behavior
-- [] add event bridge and another lambda to handle it
+- [x] add event bridge and another lambda to handle it
+- [x] send bridge event to everybody
 - [] add some kind of identity on client connect (header?), store in dynamo
 - [] ability to write messages to particular clients (writing on websocket)
 - [] ability to send messages to particular clients (from bridge event)
@@ -22,9 +23,16 @@ Major goals:
 
 ## todo (in productionalized version)
 
-- efficient use of dynamo
+- efficient use of dynamo. (need to look up by connectionId sometimes and by cognitoId other times. https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.html )
 - test with local dynamo https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html
 
 ## Notes
 
 ---
+
+Functions:
+
+- onconnect - inserts row
+- ondisconnect - deletes by key connectionId
+- sendmessage - scans table for all connectionIds
+- onevent - scans talble for all connectionIds, sends them the event

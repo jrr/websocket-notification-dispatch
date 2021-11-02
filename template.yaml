@@ -208,12 +208,16 @@ Resources:
       Environment:
         Variables:
           TABLE_NAME: !Ref TableName
+          EVENT_BUS_NAME: !GetAtt EventBus.Name
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref TableName
-      Environment:
-        Variables:
-          EVENT_BUS_NAME: !GetAtt EventBus.Name
+        - Statement:
+            - Effect: Allow
+              Action:
+                - "execute-api:ManageConnections"
+              Resource:
+                - !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${SimpleChatWebSocket}/*"
       Events:
         EventBridgeEvent:
           Type: EventBridgeRule
