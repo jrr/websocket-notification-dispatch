@@ -214,7 +214,7 @@ Resources:
         EventBridgeEvent:
           Type: EventBridgeRule
           Properties:
-            EventPattern: { "source": [{ "prefix": "" }] }
+            Pattern: { "source": [{ "prefix": "" }] }
             EventBusName: !GetAtt EventBus.Arn
   # ================================================================
 
@@ -234,6 +234,14 @@ Outputs:
   SendMessageFunctionArn:
     Description: "SendMessage function ARN"
     Value: !GetAtt SendMessageFunction.Arn
+
+  OnEventFunctionArn:
+    Description: "OnEvent function ARN"
+    Value: !GetAtt OnEventFunction.Arn
+
+  EventBus:
+    Description: "Event bus"
+    Value: !GetAtt EventBus.Arn
 
   WebSocketURI:
     Description: "The WSS Protocol URI to connect to"
