@@ -1,5 +1,6 @@
 
-WEBSOCKET_URI=wss://b80almw9x0.execute-api.us-west-1.amazonaws.com/Prod
+WEBSOCKET_URI=wss://h627krjgbi.execute-api.us-west-1.amazonaws.com/Prod
+
 
 WSCAT=yarn run wscat
 
