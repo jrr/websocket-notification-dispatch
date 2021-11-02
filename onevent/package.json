@@ -1,0 +1,12 @@
+{
+  "name": "on-event",
+  "version": "1.0.0",
+  "description": "onevent example for browser notification",
+  "main": "src/app.js",
+  "author": "SAM CLI",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "aws-sdk": "^2.739.0"
+  }
+}
