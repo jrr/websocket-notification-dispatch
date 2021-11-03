@@ -28,3 +28,6 @@ log-ondisconnect:
 
 log-sendmessage:
 	${AWS_TAIL} /aws/lambda/websocket-test-sendmessage
+
+dump-dynamo:
+	aws dynamodb scan --table-name simplechat_connections --region us-west-1 --output text

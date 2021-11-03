@@ -15,7 +15,7 @@ const APIGW_DOMAIN_NAME = "h627krjgbi.execute-api.us-west-1.amazonaws.com";
 const APIGW_STAGE = "Prod";
 
 exports.handler = async (event) => {
-  console.log("onevent:", JSON.stringify(event));
+  console.log("📩️ onevent:", JSON.stringify(event));
 
   let connectionData;
 
