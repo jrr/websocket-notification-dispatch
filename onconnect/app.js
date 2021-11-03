@@ -9,10 +9,11 @@ const ddb = new AWS.DynamoDB.DocumentClient({
 });
 
 exports.handler = async (event) => {
-  console.log("🔗 onconnect:", JSON.stringify(event));
+  console.log("🔗  onconnect:", JSON.stringify(event));
 
-  const ua = event?.requestContext?.identiy?.userAgent ?? "(no user agent)";
-  console.log(`🕵️‍️ User Agent: ${ua}`);
+  const userAgent =
+    event?.requestContext?.identity?.userAgent ?? "(no user agent)";
+  console.log(`🕵️  User Agent: ${ua}`);
 
   const putParams = {
     TableName: process.env.TABLE_NAME,

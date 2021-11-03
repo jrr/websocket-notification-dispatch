@@ -15,7 +15,7 @@ const ddb = new AWS.DynamoDB.DocumentClient({
 });
 
 exports.handler = async (event) => {
-  console.log("️❌ ondisconnect:", JSON.stringify(event));
+  console.log("️❌  ondisconnect:", JSON.stringify(event));
   const deleteParams = {
     TableName: process.env.TABLE_NAME,
     Key: {
