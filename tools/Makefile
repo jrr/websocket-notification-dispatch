@@ -7,5 +7,10 @@ WSCAT=yarn run wscat
 all:
 	echo "(check the Makefile for available rules)"
 
+NUM_WSCATS=$(strip $(shell ps -o command |grep 'yarn run wscat' |grep -v grep |wc -l))
+
+test:
+	echo "num cats: '$(NUM_WSCATS)'"
+
 connect_client:
-	$(WSCAT) -c $(WEBSOCKET_URI)
+	$(WSCAT) -c $(WEBSOCKET_URI) -H "User-Agent: wscat #$(NUM_WSCATS)"
