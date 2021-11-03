@@ -103,8 +103,8 @@ Resources:
           AttributeType: "S"
         - AttributeName: "userAgent"
           AttributeType: "S"
-        # - AttributeName: "identity"
-        #   AttributeType: "S"
+        - AttributeName: "userId"
+          AttributeType: "S"
       KeySchema:
         - AttributeName: "connectionId"
           KeyType: "HASH"

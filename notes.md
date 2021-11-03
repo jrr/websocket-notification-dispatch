@@ -13,7 +13,7 @@ Major goals:
 - [x] deploy and test the default starter kit behavior
 - [x] add event bridge and another lambda to handle it
 - [x] send bridge event to everybody
-- [] add some kind of identity on client connect (header?), store in dynamo
+- [x] add some kind of identity on client connect (header?), store in dynamo
 - [] ability to write messages to particular clients (writing on websocket)
 - [] ability to send messages to particular clients (from bridge event)
 
@@ -29,6 +29,10 @@ Major goals:
 ## Notes
 
 ---
+
+```
+make connect_client USER_ID=Bob
+```
 
 Functions:
 

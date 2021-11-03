@@ -13,13 +13,22 @@ exports.handler = async (event) => {
 
   const userAgent =
     event?.requestContext?.identity?.userAgent ?? "(no user agent)";
-  console.log(`🕵️  User Agent: ${userAgent}`);
+
+  const userId = event?.headers?.UserId ?? null;
+
+  console.log(`User Agent: '${userAgent}', UserId: '${userId}''`);
+
+  if (userId == null) {
+    console.error("missing UserId header");
+    return { statusCode: 400, body: "UserId header required." };
+  }
 
   const putParams = {
     TableName: process.env.TABLE_NAME,
     Item: {
       connectionId: event.requestContext.connectionId,
       userAgent,
+      userId,
     },
   };
 
