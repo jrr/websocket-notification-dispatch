@@ -13,12 +13,13 @@ exports.handler = async (event) => {
 
   const userAgent =
     event?.requestContext?.identity?.userAgent ?? "(no user agent)";
-  console.log(`🕵️  User Agent: ${ua}`);
+  console.log(`🕵️  User Agent: ${userAgent}`);
 
   const putParams = {
     TableName: process.env.TABLE_NAME,
     Item: {
       connectionId: event.requestContext.connectionId,
+      userAgent,
     },
   };
 

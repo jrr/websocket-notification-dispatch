@@ -101,6 +101,10 @@ Resources:
       AttributeDefinitions:
         - AttributeName: "connectionId"
           AttributeType: "S"
+        - AttributeName: "userAgent"
+          AttributeType: "S"
+        # - AttributeName: "identity"
+        #   AttributeType: "S"
       KeySchema:
         - AttributeName: "connectionId"
           KeyType: "HASH"
