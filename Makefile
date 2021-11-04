@@ -8,10 +8,6 @@ deploy:
 describe-stack:
 	aws cloudformation describe-stacks --region us-west-1 --stack-name john-websocket-example | jq -r '.Stacks[0].Outputs'
 
-# log-event-handler
-# dump-dynamo
-# connect client
-
 AWS_TAIL=aws logs tail --format short --region us-west-1 --follow
 
 log-event-bus:

@@ -15,31 +15,39 @@ const APIGW_DOMAIN_NAME = "h627krjgbi.execute-api.us-west-1.amazonaws.com";
 const APIGW_STAGE = "Prod";
 
 exports.handler = async (event) => {
-  console.log("📩️  onevent:", JSON.stringify(event));
+  // console.log("📩️  onevent:", JSON.stringify(event));
+
+  const { detail } = event;
+  const { to, message } = detail;
+  console.log(`📩️  onevent: To: '${to}': ->\t'${message}'`);
 
   let connectionData;
 
   try {
-    connectionData = await ddb
-      .scan({ TableName: TABLE_NAME, ProjectionExpression: "connectionId" })
-      .promise();
+    connectionData = await ddb.scan({ TableName: TABLE_NAME }).promise();
   } catch (e) {
     return { statusCode: 500, body: e.stack };
   }
-
-  console.log(`scanned ${connectionData.Items.length} rows from dynamo.`);
 
   const apigwManagementApi = new AWS.ApiGatewayManagementApi({
     apiVersion: "2018-11-29",
     endpoint: APIGW_DOMAIN_NAME + "/" + APIGW_STAGE,
   });
 
-  const postCalls = connectionData.Items.map(async ({ connectionId }) => {
+  const matchingConnections = connectionData.Items.filter(
+    (c) => c.userId === to
+  );
+
+  console.log(
+    `📩️  onevent: Relaying message to ${matchingConnections.length} websocket connections.`
+  );
+
+  const postCalls = matchingConnections.map(async ({ connectionId }) => {
     try {
       await apigwManagementApi
         .postToConnection({
           ConnectionId: connectionId,
-          Data: JSON.stringify(event),
+          Data: JSON.stringify(event.detail.message),
         })
         .promise();
     } catch (e) {
