@@ -1,8 +1,0 @@
-[
-  {
-    "EventBusName": "websocket-test-bus",
-    "Source": "local-dev",
-    "DetailType": "example-event",
-    "Detail": "{ \"key1\": \"value3\", \"key2\": \"value4\" }"
-  }
-]
