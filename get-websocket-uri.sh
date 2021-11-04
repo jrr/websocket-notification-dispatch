@@ -4,3 +4,5 @@ url=$(aws cloudformation describe-stacks --region us-west-1 --stack-name "john-w
 echo "Websocket URL $url"
 
 printf "WEBSOCKET_URI=%s\n" "$url" >.stack-values.gen.mk
+
+printf "window.websocketUri = \"%s\";" "$url" >browser/.websocket-uri.gen.js
