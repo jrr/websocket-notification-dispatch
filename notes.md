@@ -14,8 +14,8 @@ Major goals:
 - [x] add event bridge and another lambda to handle it
 - [x] send bridge event to everybody
 - [x] add some kind of identity on client connect (header?), store in dynamo
-- [] ability to write messages to particular clients (writing on websocket)
-- [] ability to send messages to particular clients (from bridge event)
+- ~~[] ability to write messages to particular clients (writing on websocket)~~
+- [x] ability to send messages to particular clients (from bridge event)
 
 ## todo (further research)
 
@@ -25,6 +25,7 @@ Major goals:
 
 - efficient use of dynamo. (need to look up by connectionId sometimes and by cognitoId other times. https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.html )
 - test with local dynamo https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html
+- typescript. (raw JS is way faster than dockerized lambdas, especially on cold start. try local TS -> JS build?)
 
 ## Notes
 
@@ -36,7 +37,7 @@ make connect_client USER_ID=Bob
 
 Functions:
 
-- onconnect - inserts row
-- ondisconnect - deletes by key connectionId
-- sendmessage - scans table for all connectionIds
-- onevent - scans talble for all connectionIds, sends them the event
+- onconnect - inserts row in table
+- ondisconnect - deletes from table by key connectionId
+- sendmessage - scans table for all connectionIds, sends message to everyone. (leftover from AWS example, not needed for proof of concept)
+- onevent - scans table for all records, sends event message to matching userIds. (future: efficient lookup. GSI?)
