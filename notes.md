@@ -8,6 +8,20 @@ Major goals:
 - arbitrary events come in on event bridge, targeting a specific user
 - connected clients receive messages meant for them
 
+## Demo (from CLI)
+
+- go into `tools` directory and yarn install (to get wscat)
+- open up a few more terminals in this directory and connect some clients, e.g.:
+
+```
+make connect_client USER_ID=Alice USER_AGENT=Desktop
+make connect_client USER_ID=Bob USER_AGENT=Laptop
+make connect_client USER_ID=Bob USER_AGENT=iPad
+```
+
+- back in the root directory, see the current connections with `make dump-dynamo`
+- send messages to specific users: `./post-event.sh Bob "hey bob"`
+
 ## todo (immediate):
 
 - [x] deploy and test the default starter kit behavior
