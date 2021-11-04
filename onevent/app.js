@@ -10,7 +10,7 @@ const ddb = new AWS.DynamoDB.DocumentClient({
 
 const { TABLE_NAME } = process.env;
 
-// todo: env vars from cloudformation:
+// todo: env vars from cloudformation (since the info isn't in the incoming event):
 const APIGW_DOMAIN_NAME = "h627krjgbi.execute-api.us-west-1.amazonaws.com";
 const APIGW_STAGE = "Prod";
 

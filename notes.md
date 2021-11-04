@@ -30,7 +30,8 @@ make connect_client USER_ID=Bob USER_AGENT=iPad
 - [x] add some kind of identity on client connect (header?), store in dynamo
 - ~~[] ability to write messages to particular clients (writing on websocket)~~
 - [x] ability to send messages to particular clients (from bridge event)
-- [ ] script to retrieve websocket URL and put it in an unversioned file for use by both clients
+- [x] script to retrieve websocket URL and put it in an unversioned file for use by both clients
+- [ ] api gateway endpoint in env var for onconnect handler
 - [ ] demo from browser clients
 
 ## todo (further research)

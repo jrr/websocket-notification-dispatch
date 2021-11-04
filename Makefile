@@ -4,6 +4,7 @@ all:
 
 deploy:
 	sam deploy
+	./get-websocket-uri.sh
 
 describe-stack:
 	aws cloudformation describe-stacks --region us-west-1 --stack-name john-websocket-example | jq -r '.Stacks[0].Outputs'
