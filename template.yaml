@@ -209,6 +209,13 @@ Resources:
         Variables:
           TABLE_NAME: !Ref TableName
           EVENT_BUS_NAME: !GetAtt EventBus.Name
+          APIGW_ENDPOINT: !Join
+            - ""
+            - - !Ref SimpleChatWebSocket
+              - ".execute-api."
+              - !Ref "AWS::Region"
+              - ".amazonaws.com/"
+              - !Ref "Stage"
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref TableName

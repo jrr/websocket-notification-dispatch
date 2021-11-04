@@ -8,11 +8,7 @@ const ddb = new AWS.DynamoDB.DocumentClient({
   region: process.env.AWS_REGION,
 });
 
-const { TABLE_NAME } = process.env;
-
-// todo: env vars from cloudformation (since the info isn't in the incoming event):
-const APIGW_DOMAIN_NAME = "h627krjgbi.execute-api.us-west-1.amazonaws.com";
-const APIGW_STAGE = "Prod";
+const { TABLE_NAME, APIGW_ENDPOINT } = process.env;
 
 exports.handler = async (event) => {
   // console.log("📩️  onevent:", JSON.stringify(event));
@@ -20,6 +16,7 @@ exports.handler = async (event) => {
   const { detail } = event;
   const { to, message } = detail;
   console.log(`📩️  onevent: To: '${to}': ->\t'${message}'`);
+  console.log("API GW endpoint", APIGW_ENDPOINT);
 
   let connectionData;
 
@@ -31,7 +28,7 @@ exports.handler = async (event) => {
 
   const apigwManagementApi = new AWS.ApiGatewayManagementApi({
     apiVersion: "2018-11-29",
-    endpoint: APIGW_DOMAIN_NAME + "/" + APIGW_STAGE,
+    endpoint: APIGW_ENDPOINT,
   });
 
   const matchingConnections = connectionData.Items.filter(
